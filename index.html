@@ -218,6 +218,72 @@ aside{background:var(--surface);border-right:1px solid var(--border);padding:18p
 .streak-lbl{font-size:0.73rem;color:var(--text-dim);}
 .streak-num{font-family:'DM Mono',monospace;font-size:1.7rem;color:var(--gold);font-weight:500;line-height:1.1;}
 
+/* ── MONTHLY TAB ── */
+.monthly-top-bar{padding:10px 20px;border-bottom:1px solid var(--border);background:var(--surface);display:flex;align-items:center;justify-content:space-between;flex-shrink:0;gap:12px;}
+.monthly-month-nav{display:flex;align-items:center;gap:8px;}
+.monthly-month-nav button{background:none;border:1px solid var(--border);color:var(--text-dim);width:28px;height:28px;border-radius:6px;cursor:pointer;font-size:0.85rem;display:flex;align-items:center;justify-content:center;transition:all 0.15s;}
+.monthly-month-nav button:hover{border-color:var(--accent);color:var(--accent);}
+.monthly-month-label{font-size:0.95rem;font-weight:500;min-width:90px;text-align:center;}
+.monthly-top-actions{display:flex;gap:8px;}
+.monthly-settings-btn{background:none;border:1px solid var(--border);border-radius:8px;padding:5px 14px;color:var(--text-dim);font-size:0.78rem;cursor:pointer;transition:all 0.15s;font-family:'Noto Sans KR',sans-serif;}
+.monthly-settings-btn:hover{border-color:var(--accent);color:var(--accent);}
+.monthly-today-btn{font-size:0.78rem;color:var(--accent);background:rgba(124,106,247,0.1);border:1px solid rgba(124,106,247,0.3);border-radius:8px;padding:5px 14px;cursor:pointer;transition:all 0.15s;}
+.monthly-today-btn:hover{background:rgba(124,106,247,0.2);}
+
+.monthly-scroll{flex:1;overflow:auto;}
+.monthly-scroll::-webkit-scrollbar{width:4px;height:4px;}
+.monthly-scroll::-webkit-scrollbar-thumb{background:var(--border);border-radius:2px;}
+
+/* monthly grid table */
+.monthly-table{border-collapse:collapse;min-width:100%;font-size:0.78rem;}
+.monthly-table th,
+.monthly-table td{border:1px solid var(--border);padding:0;}
+.monthly-table th{background:var(--surface2);color:var(--text-dim);font-weight:500;font-size:0.7rem;white-space:nowrap;padding:5px 8px;text-align:center;}
+.monthly-table th.item-col{text-align:left;padding:5px 10px;min-width:90px;}
+.monthly-table th.day-col{min-width:80px;font-family:'DM Mono',monospace;}
+.monthly-table th.todo-col{min-width:160px;}
+.monthly-table th.week-hd{background:var(--surface);color:var(--accent);font-size:0.68rem;font-family:'DM Mono',monospace;}
+
+.monthly-item-cell{padding:5px 10px;font-size:0.8rem;white-space:nowrap;display:flex;align-items:center;gap:6px;}
+.monthly-item-dot{width:8px;height:8px;border-radius:50%;flex-shrink:0;}
+
+.monthly-plan-cell{padding:0;}
+.monthly-plan-input{width:100%;height:100%;min-height:32px;background:transparent;border:none;outline:none;color:var(--text);font-family:'Noto Sans KR',sans-serif;font-size:0.75rem;padding:5px 7px;resize:none;display:block;line-height:1.4;}
+.monthly-plan-input:focus{background:rgba(124,106,247,0.07);}
+.monthly-plan-input.has-value{color:var(--text);}
+.monthly-plan-cell.today-col{background:rgba(124,106,247,0.06);}
+
+.monthly-todo-cell{padding:0;vertical-align:top;}
+.monthly-todo-input{width:100%;height:100%;min-height:80px;background:transparent;border:none;outline:none;color:var(--text);font-family:'Noto Sans KR',sans-serif;font-size:0.75rem;padding:7px 9px;resize:none;display:block;line-height:1.5;}
+.monthly-todo-input:focus{background:rgba(124,106,247,0.07);}
+
+.monthly-table tr.week-row-header td{background:var(--surface);padding:4px 10px;font-size:0.68rem;color:var(--text-dim);font-family:'DM Mono',monospace;}
+
+/* ── MONTHLY SETTINGS MODAL ── */
+.modal-overlay{position:fixed;inset:0;background:rgba(0,0,0,0.6);z-index:500;display:flex;align-items:center;justify-content:center;}
+.modal-overlay.hidden{display:none;}
+.modal-box{background:var(--surface);border:1px solid var(--border);border-radius:16px;padding:28px;width:100%;max-width:440px;max-height:80vh;overflow-y:auto;display:flex;flex-direction:column;gap:16px;}
+.modal-box::-webkit-scrollbar{width:4px;}
+.modal-box::-webkit-scrollbar-thumb{background:var(--border);border-radius:2px;}
+.modal-title{font-size:1rem;font-weight:500;display:flex;align-items:center;justify-content:space-between;}
+.modal-close{background:none;border:none;color:var(--text-dim);font-size:1.1rem;cursor:pointer;padding:2px 6px;border-radius:4px;transition:color 0.15s;}
+.modal-close:hover{color:var(--red);}
+.modal-items-list{display:flex;flex-direction:column;gap:8px;}
+.modal-item-row{display:flex;align-items:center;gap:8px;background:var(--surface2);border:1px solid var(--border);border-radius:10px;padding:8px 12px;}
+.modal-item-color{width:18px;height:18px;border-radius:50%;border:2px solid rgba(255,255,255,0.2);cursor:pointer;flex-shrink:0;}
+.modal-item-name{flex:1;background:transparent;border:none;outline:none;color:var(--text);font-family:'Noto Sans KR',sans-serif;font-size:0.85rem;}
+.modal-item-cat{width:120px;background:var(--surface);border:1px solid var(--border);border-radius:6px;padding:3px 6px;color:var(--text-dim);font-size:0.72rem;font-family:'Noto Sans KR',sans-serif;outline:none;}
+.modal-item-cat:focus{border-color:var(--accent);}
+.modal-item-del{background:none;border:none;color:var(--text-dim);cursor:pointer;font-size:0.8rem;padding:2px 5px;border-radius:4px;transition:color 0.15s;flex-shrink:0;}
+.modal-item-del:hover{color:var(--red);}
+.modal-add-row{display:flex;gap:8px;}
+.modal-add-input{flex:1;background:var(--surface2);border:1px solid var(--border);border-radius:8px;padding:8px 12px;color:var(--text);font-family:'Noto Sans KR',sans-serif;font-size:0.85rem;outline:none;}
+.modal-add-input:focus{border-color:var(--accent);}
+.modal-add-btn{background:var(--accent);border:none;border-radius:8px;padding:8px 16px;color:white;font-size:0.82rem;cursor:pointer;font-family:'Noto Sans KR',sans-serif;transition:background 0.15s;}
+.modal-add-btn:hover{background:#6a58e0;}
+.modal-save-btn{background:var(--accent);border:none;border-radius:10px;padding:10px;color:white;font-family:'Noto Sans KR',sans-serif;font-size:0.9rem;font-weight:500;cursor:pointer;transition:background 0.15s;}
+.modal-save-btn:hover{background:#6a58e0;}
+
 /* ── SHARED ── */
 @keyframes slideIn{from{opacity:0;transform:translateY(-8px)}to{opacity:1;transform:translateY(0)}}
 .spinner{width:16px;height:16px;border:2px solid var(--border);border-top-color:var(--accent);border-radius:50%;animation:spin 0.6s linear infinite;display:inline-block;}
@@ -255,6 +321,7 @@ aside{background:var(--surface);border-right:1px solid var(--border);padding:18p
 <header>
   <div class="logo">my<span>//</span>planner</div>
   <nav class="nav-tabs">
+    <button class="nav-tab" data-tab="monthly">월간계획</button>
     <button class="nav-tab active" data-tab="goals">목표/실적</button>
     <button class="nav-tab" data-tab="time">시간가계부</button>
     <button class="nav-tab" data-tab="gratitude">감사일기</button>
@@ -280,6 +347,24 @@ aside{background:var(--surface);border-right:1px solid var(--border);padding:18p
   </aside>
 
   <div class="content">
+
+    <!-- ── 월간계획 ── -->
+    <div class="tab-pane" id="pane-monthly">
+      <div class="monthly-top-bar">
+        <div class="monthly-month-nav">
+          <button id="monthlyPrevMonth">‹</button>
+          <div class="monthly-month-label" id="monthlyMonthLabel"></div>
+          <button id="monthlyNextMonth">›</button>
+        </div>
+        <div class="monthly-top-actions">
+          <button class="monthly-today-btn" id="monthlyThisMonth">이번달</button>
+          <button class="monthly-settings-btn" id="monthlySettingsBtn">⚙ 항목 설정</button>
+        </div>
+      </div>
+      <div class="monthly-scroll" id="monthlyScroll">
+        <div class="loading-row"><div class="spinner"></div> 불러오는 중...</div>
+      </div>
+    </div>
 
     <!-- ── 목표/실적 ── -->
     <div class="tab-pane active" id="pane-goals">
@@ -372,6 +457,22 @@ aside{background:var(--surface);border-right:1px solid var(--border);padding:18p
   </div>
 </main>
 
+<!-- MONTHLY SETTINGS MODAL -->
+<div class="modal-overlay hidden" id="monthlySettingsModal">
+  <div class="modal-box">
+    <div class="modal-title">
+      <span>월간계획 항목 설정</span>
+      <button class="modal-close" id="modalClose">✕</button>
+    </div>
+    <div class="modal-items-list" id="modalItemsList"></div>
+    <div class="modal-add-row">
+      <input class="modal-add-input" id="modalNewName" type="text" placeholder="새 항목 이름">
+      <button class="modal-add-btn" id="modalAddItemBtn">+ 추가</button>
+    </div>
+    <button class="modal-save-btn" id="modalSaveBtn">저장</button>
+  </div>
+</div>
+
 <script>
 // ╔══════════════════════════════════════════╗
 // ║  🔑 여기만 수정하세요 (2줄)               ║
@@ -382,7 +483,7 @@ const SUPABASE_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZ
 
 const sb = supabase.createClient(SUPABASE_URL, SUPABASE_KEY);
 
-// ── 목표/실적 카테고리 기본값 (구글 시트 기반) ──
+// ── 목표/실적 카테고리 기본값 ──
 const GOAL_GROUPS = [
   { group: '캘린더', items: [
     { cat: '투자일정', defaultTarget: '' },
@@ -423,11 +524,30 @@ const TIME_CATS = {
 };
 const CAT_COLORS = { '투자':'#7c6af7', '가족':'#f26abe', '업무':'#4ecdc4', '건강':'#f2c86a' };
 
+// ── 월간계획 기본 항목 ──
+const DEFAULT_MONTHLY_ITEMS = [
+  { name: '투자일정', color: '#f26a6a', goal_cat: '캘린더/투자일정' },
+  { name: '강의관련', color: '#f2c86a', goal_cat: '캘린더/강의' },
+  { name: '발품/임장', color: '#6af2a0', goal_cat: '캘린더/임장' },
+  { name: '손품/임보', color: '#4ecdc4', goal_cat: '캘린더/임보' },
+  { name: '독서',     color: '#7c6af7', goal_cat: '캘린더/독서' },
+  { name: '운동',     color: '#f26abe', goal_cat: '캘린더/운동' },
+  { name: '개인일정', color: '#f2d06a', goal_cat: '캘린더/개인일정' },
+];
+
 // ── State ──
 let currentUser = null, selectedDate, viewYear, viewMonth;
 const today    = new Date();
 const todayKey = toKey(today.getFullYear(), today.getMonth(), today.getDate());
 let goalRecords = {}, timeRecords = {}, gratitudes = {}, keyResults = [];
+
+// Monthly state
+let monthlyYear = today.getFullYear();
+let monthlyMonth = today.getMonth(); // 0-indexed
+let monthlyItems = [];       // [{id, name, color, goal_cat, sort_order}]
+let monthlyPlans = {};       // { "date_itemId": content }
+let weeklyTodos  = {};       // { "weekStart": content }
+let monthlyDebounceTimers = {};
 
 function toKey(y,m,d){ return `${y}-${String(m+1).padStart(2,'0')}-${String(d).padStart(2,'0')}`; }
 function esc(s){ return String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;'); }
@@ -511,7 +631,8 @@ async function initApp(){
       tab.classList.add('active');
       document.querySelectorAll('.tab-pane').forEach(p=>p.classList.remove('active'));
       document.getElementById('pane-'+tab.dataset.tab).classList.add('active');
-      renderDateLabels();
+      if(tab.dataset.tab==='monthly') renderMonthlyGrid();
+      else renderDateLabels();
     });
   });
 
@@ -529,6 +650,26 @@ async function initApp(){
   document.getElementById('prevMonth').addEventListener('click',()=>{ viewMonth--; if(viewMonth<0){viewMonth=11;viewYear--;} renderCalendar(); });
   document.getElementById('nextMonth').addEventListener('click',()=>{ viewMonth++; if(viewMonth>11){viewMonth=0;viewYear++;} renderCalendar(); });
 
+  // Monthly month nav
+  document.getElementById('monthlyPrevMonth').addEventListener('click',()=>{
+    monthlyMonth--; if(monthlyMonth<0){monthlyMonth=11;monthlyYear--;}
+    loadAndRenderMonthly();
+  });
+  document.getElementById('monthlyNextMonth').addEventListener('click',()=>{
+    monthlyMonth++; if(monthlyMonth>11){monthlyMonth=0;monthlyYear++;}
+    loadAndRenderMonthly();
+  });
+  document.getElementById('monthlyThisMonth').addEventListener('click',()=>{
+    monthlyYear=today.getFullYear(); monthlyMonth=today.getMonth();
+    loadAndRenderMonthly();
+  });
+  document.getElementById('monthlySettingsBtn').addEventListener('click',openMonthlySettings);
+  document.getElementById('modalClose').addEventListener('click',closeMonthlySettings);
+  document.getElementById('monthlySettingsModal').addEventListener('click',e=>{ if(e.target===e.currentTarget) closeMonthlySettings(); });
+  document.getElementById('modalAddItemBtn').addEventListener('click',modalAddItem);
+  document.getElementById('modalNewName').addEventListener('keydown',e=>{ if(e.key==='Enter') modalAddItem(); });
+  document.getElementById('modalSaveBtn').addEventListener('click',saveMonthlyItems);
+
   // Save buttons
   document.getElementById('goalsSaveBtn').addEventListener('click',saveGoals);
   document.getElementById('timeSaveBtn').addEventListener('click',saveTime);
@@ -542,7 +683,7 @@ async function initApp(){
 
   renderCalendar(); renderDateLabels();
   setSyncState('syncing','불러오는 중');
-  await Promise.all([loadGoals(selectedDate), loadTime(selectedDate), loadGratitudes(), loadKR()]);
+  await Promise.all([loadGoals(selectedDate), loadTime(selectedDate), loadGratitudes(), loadKR(), loadMonthlyItems()]);
   setSyncState('synced','동기화됨');
   renderGoals(); renderGoalsSidebar(); renderTime(); renderTimeChart(); renderGratitude(); calcStreak();
 }
@@ -949,6 +1090,376 @@ function calcStreak(){
   }
   document.getElementById('streakNum').textContent=streak+'일';
 }
+
+// ══════════════════════════════════════════════
+// ── MONTHLY PLAN ──
+// ══════════════════════════════════════════════
+
+async function loadMonthlyItems(){
+  const {data,error}=await sb.from('monthly_items')
+    .select('*').eq('user_id',currentUser.id).order('sort_order');
+  if(error){console.error(error);return;}
+  if(!data||data.length===0){
+    await seedDefaultMonthlyItems();
+  } else {
+    monthlyItems=data;
+  }
+}
+
+async function seedDefaultMonthlyItems(){
+  const rows=DEFAULT_MONTHLY_ITEMS.map((item,i)=>({
+    user_id:currentUser.id, name:item.name, color:item.color,
+    goal_cat:item.goal_cat, sort_order:i,
+  }));
+  const {data,error}=await sb.from('monthly_items').insert(rows).select();
+  if(error){console.error(error);return;}
+  monthlyItems=data||[];
+}
+
+async function loadMonthlyData(){
+  // Load plans for the entire month
+  const monthStr=`${monthlyYear}-${String(monthlyMonth+1).padStart(2,'0')}`;
+  const dateFrom=`${monthStr}-01`;
+  const lastDay=new Date(monthlyYear,monthlyMonth+1,0).getDate();
+  const dateTo=`${monthStr}-${String(lastDay).padStart(2,'0')}`;
+
+  const [plansRes, todosRes]=await Promise.all([
+    sb.from('monthly_plans').select('*')
+      .eq('user_id',currentUser.id)
+      .gte('date',dateFrom).lte('date',dateTo),
+    sb.from('weekly_todos').select('*')
+      .eq('user_id',currentUser.id),
+  ]);
+
+  monthlyPlans={};
+  if(!plansRes.error && plansRes.data){
+    plansRes.data.forEach(p=>{
+      monthlyPlans[p.date+'_'+p.item_id]=p.content||'';
+    });
+  }
+  weeklyTodos={};
+  if(!todosRes.error && todosRes.data){
+    todosRes.data.forEach(t=>{ weeklyTodos[t.week_start]=t.content||''; });
+  }
+}
+
+async function loadAndRenderMonthly(){
+  document.getElementById('monthlyScroll').innerHTML='<div class="loading-row"><div class="spinner"></div> 불러오는 중...</div>';
+  setSyncState('syncing','불러오는 중');
+  await loadMonthlyData();
+  setSyncState('synced','동기화됨');
+  renderMonthlyGrid();
+}
+
+// Get Monday-based week start for a given date string
+function getWeekStart(dateStr){
+  const d=new Date(dateStr);
+  const day=d.getDay(); // 0=Sun
+  const diff=day===0?-6:1-day; // shift to Monday
+  d.setDate(d.getDate()+diff);
+  return d.toISOString().slice(0,10);
+}
+
+// Build list of weeks (Mon-Sun) that overlap the month
+function getMonthWeeks(year,month){
+  const weeks=[];
+  const firstDay=new Date(year,month,1);
+  const lastDay=new Date(year,month+1,0);
+
+  // Start from Monday of the week containing the 1st
+  const startDay=new Date(firstDay);
+  const dow=startDay.getDay();
+  startDay.setDate(startDay.getDate()-(dow===0?6:dow-1));
+
+  const cur=new Date(startDay);
+  while(cur<=lastDay){
+    const weekStart=cur.toISOString().slice(0,10);
+    const days=[];
+    for(let i=0;i<7;i++){
+      const d=new Date(cur);
+      d.setDate(d.getDate()+i);
+      days.push(d.toISOString().slice(0,10));
+    }
+    weeks.push({weekStart,days});
+    cur.setDate(cur.getDate()+7);
+  }
+  return weeks;
+}
+
+function renderMonthlyGrid(){
+  const container=document.getElementById('monthlyScroll');
+  document.getElementById('monthlyMonthLabel').textContent=
+    `${monthlyYear}년 ${monthlyMonth+1}월`;
+
+  if(monthlyItems.length===0){
+    container.innerHTML=`<div class="loading-row" style="flex-direction:column;gap:12px;">
+      <p style="color:var(--text-dim);font-size:0.88rem;">항목이 없습니다. ⚙ 항목 설정에서 추가해주세요.</p>
+    </div>`;
+    return;
+  }
+
+  const weeks=getMonthWeeks(monthlyYear,monthlyMonth);
+  const monthStr=`${monthlyYear}-${String(monthlyMonth+1).padStart(2,'0')}`;
+
+  const table=document.createElement('table');
+  table.className='monthly-table';
+
+  // Header row
+  const thead=document.createElement('thead');
+  const hrow=document.createElement('tr');
+  hrow.innerHTML=`<th class="item-col">항목</th>`;
+  const DAY_LABELS=['월','화','수','목','금','토','일'];
+  weeks.forEach(w=>{
+    w.days.forEach((d,di)=>{
+      const inMonth=d.startsWith(monthStr);
+      const dt=new Date(d);
+      const dayNum=dt.getDate();
+      const th=document.createElement('th');
+      th.className='day-col';
+      th.style.opacity=inMonth?'1':'0.35';
+      const isToday=d===todayKey;
+      if(isToday) th.style.color='var(--accent)';
+      th.textContent=`${DAY_LABELS[di]}\n${dayNum}`;
+      th.style.whiteSpace='pre-line';
+      hrow.appendChild(th);
+    });
+    const thTodo=document.createElement('th');
+    thTodo.className='todo-col';
+    const wStart=new Date(w.weekStart);
+    const wEnd=new Date(w.days[6]);
+    thTodo.textContent=`주간 TODO\n${wStart.getMonth()+1}/${wStart.getDate()}~${wEnd.getMonth()+1}/${wEnd.getDate()}`;
+    thTodo.style.whiteSpace='pre-line';
+    hrow.appendChild(thTodo);
+  });
+  thead.appendChild(hrow);
+  table.appendChild(thead);
+
+  // Body
+  const tbody=document.createElement('tbody');
+  monthlyItems.forEach(item=>{
+    const tr=document.createElement('tr');
+
+    // Item name cell
+    const tdName=document.createElement('td');
+    tdName.innerHTML=`<div class="monthly-item-cell"><span class="monthly-item-dot" style="background:${esc(item.color)};"></span>${esc(item.name)}</div>`;
+    tr.appendChild(tdName);
+
+    weeks.forEach((w,wi)=>{
+      w.days.forEach(dateStr=>{
+        const inMonth=dateStr.startsWith(monthStr);
+        const planKey=dateStr+'_'+item.id;
+        const content=monthlyPlans[planKey]||'';
+
+        const td=document.createElement('td');
+        td.className='monthly-plan-cell';
+        if(dateStr===todayKey) td.classList.add('today-col');
+        if(!inMonth) td.style.opacity='0.35';
+
+        const ta=document.createElement('textarea');
+        ta.className='monthly-plan-input';
+        ta.rows=2;
+        ta.value=content;
+        ta.placeholder='';
+        if(content) ta.classList.add('has-value');
+        ta.dataset.date=dateStr;
+        ta.dataset.itemId=item.id;
+        ta.dataset.goalCat=item.goal_cat||'';
+
+        ta.addEventListener('input',function(){
+          this.classList.toggle('has-value',!!this.value);
+          debounceSaveMonthlyCell(this.dataset.date, this.dataset.itemId, this.dataset.goalCat, this.value);
+        });
+
+        td.appendChild(ta);
+        tr.appendChild(td);
+      });
+
+      // Weekly TODO cell — rowspan over all items for this week
+      if(monthlyItems.indexOf(item)===0){
+        const tdTodo=document.createElement('td');
+        tdTodo.className='monthly-todo-cell';
+        tdTodo.rowSpan=monthlyItems.length;
+        const taTodo=document.createElement('textarea');
+        taTodo.className='monthly-todo-input';
+        taTodo.value=weeklyTodos[w.weekStart]||'';
+        taTodo.placeholder='이번 주 할 일...';
+        taTodo.dataset.weekStart=w.weekStart;
+        taTodo.addEventListener('input',function(){
+          debounceSaveWeeklyTodo(this.dataset.weekStart, this.value);
+        });
+        tdTodo.appendChild(taTodo);
+        tr.appendChild(tdTodo);
+      }
+    });
+
+    tbody.appendChild(tr);
+  });
+  table.appendChild(tbody);
+
+  container.innerHTML='';
+  container.appendChild(table);
+}
+
+// ── MONTHLY SAVE (debounced) ──
+function debounceSaveMonthlyCell(dateStr, itemId, goalCat, content){
+  const key=dateStr+'_'+itemId;
+  clearTimeout(monthlyDebounceTimers[key]);
+  monthlyDebounceTimers[key]=setTimeout(()=>saveMonthlyCell(dateStr,itemId,goalCat,content), 600);
+}
+
+async function saveMonthlyCell(dateStr, itemId, goalCat, content){
+  monthlyPlans[dateStr+'_'+itemId]=content;
+  setSyncState('syncing','저장 중');
+
+  const {error}=await sb.from('monthly_plans').upsert({
+    user_id:currentUser.id, date:dateStr, item_id:itemId, content,
+  },{onConflict:'user_id,date,item_id'});
+
+  if(error){ console.error(error); setSyncState('error','저장 실패'); return; }
+  setSyncState('synced','저장됨');
+
+  // Sync target → goal_records
+  if(goalCat && content!==null){
+    // Find the group name from goalCat (e.g. "캘린더/투자일정" → group="캘린더")
+    const parts=goalCat.split('/');
+    const groupName=parts[0]||'';
+    await sb.from('goal_records').upsert({
+      user_id:currentUser.id, date:dateStr,
+      group_name:groupName, category:goalCat,
+      is_important:false,
+      target:content||null, actual:null,
+    },{onConflict:'user_id,date,category',ignoreDuplicates:false});
+    // Invalidate cache so next visit to 목표/실적 reloads
+    delete goalRecords[dateStr];
+  }
+}
+
+function debounceSaveWeeklyTodo(weekStart, content){
+  clearTimeout(monthlyDebounceTimers['todo_'+weekStart]);
+  monthlyDebounceTimers['todo_'+weekStart]=setTimeout(()=>saveWeeklyTodo(weekStart,content), 600);
+}
+
+async function saveWeeklyTodo(weekStart, content){
+  weeklyTodos[weekStart]=content;
+  setSyncState('syncing','저장 중');
+  const {error}=await sb.from('weekly_todos').upsert({
+    user_id:currentUser.id, week_start:weekStart, content,
+  },{onConflict:'user_id,week_start'});
+  if(error){ console.error(error); setSyncState('error','저장 실패'); return; }
+  setSyncState('synced','저장됨');
+}
+
+// ── MONTHLY SETTINGS MODAL ──
+function openMonthlySettings(){
+  renderModalItems();
+  document.getElementById('monthlySettingsModal').classList.remove('hidden');
+}
+function closeMonthlySettings(){
+  document.getElementById('monthlySettingsModal').classList.add('hidden');
+}
+function renderModalItems(){
+  const list=document.getElementById('modalItemsList');
+  list.innerHTML='';
+  // Build all possible goal_cat options
+  const catOptions=GOAL_GROUPS.flatMap(g=>g.items.map(i=>({val:`${g.group}/${i.cat}`,lbl:`${g.group} / ${i.cat}`})));
+
+  monthlyItems.forEach((item,idx)=>{
+    const row=document.createElement('div');
+    row.className='modal-item-row';
+    row.dataset.idx=idx;
+
+    const colorPicker=document.createElement('input');
+    colorPicker.type='color';
+    colorPicker.value=item.color||'#7c6af7';
+    colorPicker.className='modal-item-color';
+    colorPicker.title='색상 변경';
+
+    const nameInput=document.createElement('input');
+    nameInput.type='text';
+    nameInput.className='modal-item-name';
+    nameInput.value=item.name;
+    nameInput.placeholder='항목 이름';
+
+    const catSelect=document.createElement('select');
+    catSelect.className='modal-item-cat';
+    catSelect.title='목표/실적 연동 카테고리';
+    const noneOpt=document.createElement('option');
+    noneOpt.value=''; noneOpt.textContent='연동 없음';
+    catSelect.appendChild(noneOpt);
+    catOptions.forEach(opt=>{
+      const o=document.createElement('option');
+      o.value=opt.val; o.textContent=opt.lbl;
+      if(item.goal_cat===opt.val) o.selected=true;
+      catSelect.appendChild(o);
+    });
+
+    const delBtn=document.createElement('button');
+    delBtn.className='modal-item-del';
+    delBtn.textContent='✕';
+    delBtn.title='삭제';
+    delBtn.addEventListener('click',()=>{ monthlyItems.splice(idx,1); renderModalItems(); });
+
+    row.appendChild(colorPicker);
+    row.appendChild(nameInput);
+    row.appendChild(catSelect);
+    row.appendChild(delBtn);
+    list.appendChild(row);
+  });
+}
+function modalAddItem(){
+  const input=document.getElementById('modalNewName');
+  const name=input.value.trim();
+  if(!name) return;
+  monthlyItems.push({ id:null, user_id:currentUser.id, name, color:'#7c6af7', goal_cat:'', sort_order:monthlyItems.length });
+  input.value='';
+  renderModalItems();
+}
+async function saveMonthlyItems(){
+  const btn=document.getElementById('modalSaveBtn');
+  btn.disabled=true; btn.textContent='저장 중...';
+
+  // Read current values from modal
+  const rows=document.querySelectorAll('#modalItemsList .modal-item-row');
+  const updated=[];
+  rows.forEach((row,i)=>{
+    const idx=parseInt(row.dataset.idx);
+    const item=monthlyItems[idx]||{};
+    const name=row.querySelector('.modal-item-name').value.trim();
+    const color=row.querySelector('input[type=color]').value;
+    const goal_cat=row.querySelector('.modal-item-cat').value;
+    if(!name) return;
+    updated.push({ id:item.id||undefined, user_id:currentUser.id, name, color, goal_cat:goal_cat||null, sort_order:i });
+  });
+
+  // Delete removed items (those with id that are no longer in updated)
+  const keptIds=new Set(updated.filter(u=>u.id).map(u=>u.id));
+  const toDelete=monthlyItems.filter(it=>it.id&&!keptIds.has(it.id)).map(it=>it.id);
+  if(toDelete.length){
+    await sb.from('monthly_items').delete().in('id',toDelete);
+  }
+
+  // Upsert remaining
+  const toUpsert=updated.map(u=>{ const r={...u}; if(!r.id) delete r.id; return r; });
+  const {data,error}=await sb.from('monthly_items').upsert(toUpsert,{onConflict:'id'}).select();
+  if(error){ console.error(error); btn.disabled=false; btn.textContent='저장'; return; }
+
+  monthlyItems=(data||[]).sort((a,b)=>a.sort_order-b.sort_order);
+  btn.disabled=false; btn.textContent='저장';
+  closeMonthlySettings();
+  await loadMonthlyData();
+  renderMonthlyGrid();
+}
+
+// Trigger monthly load when tab is first opened
+let monthlyLoaded=false;
+document.querySelectorAll('.nav-tab').forEach(tab=>{
+  tab.addEventListener('click',()=>{
+    if(tab.dataset.tab==='monthly'&&!monthlyLoaded){
+      monthlyLoaded=true;
+      loadAndRenderMonthly();
+    }
+  });
+});
 </script>
 </body>
 </html>

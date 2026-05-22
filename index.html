@@ -298,6 +298,42 @@ aside{background:var(--surface);border-right:1px solid var(--border);padding:18p
 .modal-save-btn{background:var(--accent);border:none;border-radius:10px;padding:10px;color:white;font-family:'Noto Sans KR',sans-serif;font-size:0.9rem;font-weight:500;cursor:pointer;transition:background 0.15s;}
 .modal-save-btn:hover{background:#6a58e0;}
 
+/* ── STATUS DROPDOWN ── */
+.status-wrap{position:relative;width:100%;}
+.status-btn{display:flex;align-items:center;gap:6px;background:var(--surface2);border:1px solid var(--border);border-radius:8px;padding:5px 8px;cursor:pointer;width:100%;outline:none;transition:border-color 0.15s;font-family:'Noto Sans KR',sans-serif;}
+.status-btn:hover{border-color:var(--accent);}
+.status-sq{width:10px;height:10px;border-radius:3px;flex-shrink:0;}
+.status-lbl{font-size:0.78rem;flex:1;text-align:left;color:var(--text);}
+.status-lbl.dim{color:var(--text-dim);}
+.status-arrow{font-size:0.6rem;color:var(--text-dim);}
+.status-menu{position:absolute;right:0;top:calc(100% + 4px);background:var(--surface);border:1px solid var(--border);border-radius:10px;overflow:hidden;z-index:200;box-shadow:0 8px 24px rgba(0,0,0,0.5);min-width:110px;}
+.status-menu.hidden{display:none;}
+.status-opt{padding:8px 14px;cursor:pointer;font-size:0.82rem;display:flex;align-items:center;gap:8px;transition:background 0.1s;font-family:'Noto Sans KR',sans-serif;}
+.status-opt:hover{background:var(--surface2);}
+.status-sq-sm{width:8px;height:8px;border-radius:2px;flex-shrink:0;}
+
+/* ── GOALS: read-only target (캘린더 group from monthly plan) ── */
+.goal-row-header{display:grid;grid-template-columns:1fr 30px 160px 120px;gap:8px;padding:6px 20px;background:var(--surface);border-bottom:1px solid var(--border);position:sticky;top:0;z-index:5;}
+.goal-row{display:grid;grid-template-columns:1fr 30px 160px 120px;align-items:center;gap:8px;padding:7px 20px;border-bottom:1px solid rgba(42,42,58,0.5);transition:background 0.1s;}
+.goal-target-ro{font-size:0.78rem;color:var(--text-dim);padding:5px 9px;border:1px dashed var(--border);border-radius:8px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;font-style:italic;width:100%;}
+.goal-target-ro.has-val{color:var(--text);font-style:normal;border-color:transparent;background:var(--surface2);}
+
+/* ── ROUTINES ── */
+.routine-add-btn{background:none;border:1px solid var(--border);border-radius:6px;padding:2px 10px;font-size:0.68rem;color:var(--text-dim);cursor:pointer;transition:all 0.15s;font-family:'Noto Sans KR',sans-serif;white-space:nowrap;}
+.routine-add-btn:hover{border-color:var(--accent);color:var(--accent);}
+.routine-period{font-family:'DM Mono',monospace;font-size:0.6rem;color:var(--text-dim);white-space:nowrap;}
+.routine-del-btn{background:none;border:none;color:var(--text-dim);cursor:pointer;font-size:0.72rem;padding:1px 4px;border-radius:4px;opacity:0;transition:all 0.15s;}
+.goal-row:hover .routine-del-btn{opacity:1;}
+.routine-del-btn:hover{color:var(--red);}
+.goal-row-name{display:flex;align-items:center;gap:4px;overflow:hidden;min-width:0;}
+
+/* ── ROUTINE MODAL ── */
+.rmodal-field{display:flex;flex-direction:column;gap:5px;}
+.rmodal-label{font-size:0.73rem;color:var(--text-dim);}
+.rmodal-input{background:var(--surface2);border:1px solid var(--border);border-radius:8px;padding:8px 12px;color:var(--text);font-family:'Noto Sans KR',sans-serif;font-size:0.88rem;outline:none;width:100%;transition:border-color 0.15s;}
+.rmodal-input:focus{border-color:var(--accent);}
+.rmodal-row{display:grid;grid-template-columns:1fr 1fr;gap:10px;}
+
 /* ── SHARED ── */
 @keyframes slideIn{from{opacity:0;transform:translateY(-8px)}to{opacity:1;transform:translateY(0)}}
 .spinner{width:16px;height:16px;border:2px solid var(--border);border-top-color:var(--accent);border-radius:50%;animation:spin 0.6s linear infinite;display:inline-block;}
@@ -476,6 +512,35 @@ aside{background:var(--surface);border-right:1px solid var(--border);padding:18p
   </div>
 </main>
 
+<!-- ROUTINE ADD MODAL -->
+<div class="modal-overlay hidden" id="routineModal">
+  <div class="modal-box" style="max-width:380px;">
+    <div class="modal-title">
+      <span>루틴 추가</span>
+      <button class="modal-close" id="routineModalClose">✕</button>
+    </div>
+    <div class="rmodal-field">
+      <label class="rmodal-label">루틴 이름</label>
+      <input class="rmodal-input" id="routineNameInput" type="text" placeholder="예) 아침 확언, 운동 30분">
+    </div>
+    <div class="rmodal-row">
+      <div class="rmodal-field">
+        <label class="rmodal-label">시작일</label>
+        <input class="rmodal-input" id="routineStartInput" type="date">
+      </div>
+      <div class="rmodal-field">
+        <label class="rmodal-label">종료일</label>
+        <input class="rmodal-input" id="routineEndInput" type="date">
+      </div>
+    </div>
+    <div class="rmodal-field">
+      <label class="rmodal-label">기본 목표 (선택)</label>
+      <input class="rmodal-input" id="routineTargetInput" type="text" placeholder="예) 1회, 30분">
+    </div>
+    <button class="modal-save-btn" id="routineAddConfirmBtn">추가</button>
+  </div>
+</div>
+
 <!-- MONTHLY SETTINGS MODAL -->
 <div class="modal-overlay hidden" id="monthlySettingsModal">
   <div class="modal-box">
@@ -502,36 +567,31 @@ const SUPABASE_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZ
 
 const sb = supabase.createClient(SUPABASE_URL, SUPABASE_KEY);
 
-// ── 목표/실적 카테고리 기본값 ──
+// ── 목표/실적 카테고리 ──
+// 캘린더 그룹은 월간계획에서 목표를 읽어옴 (read-only target)
 const GOAL_GROUPS = [
-  { group: '캘린더', items: [
-    { cat: '투자일정', defaultTarget: '' },
-    { cat: '강의',     defaultTarget: '' },
-    { cat: '임장',     defaultTarget: '' },
-    { cat: '임보',     defaultTarget: '' },
-    { cat: '독서',     defaultTarget: '' },
-    { cat: '운동',     defaultTarget: '' },
-    { cat: '개인일정', defaultTarget: '' },
+  { group: '캘린더', fromMonthly: true, items: [
+    { cat: '투자일정' }, { cat: '강의' }, { cat: '임장' }, { cat: '임보' },
+    { cat: '독서' }, { cat: '운동' }, { cat: '개인일정' },
   ]},
   { group: '투자', items: [
     { cat: '오늘의 원씽', defaultTarget: '' },
   ]},
-  { group: '건강/루틴', items: [
-    { cat: '루틴1',  defaultTarget: '아침 확언' },
-    { cat: '루틴2',  defaultTarget: '목실감시금부' },
-    { cat: '루틴3',  defaultTarget: '' },
-    { cat: '루틴4',  defaultTarget: '' },
-    { cat: '루틴5',  defaultTarget: '' },
-    { cat: '루틴6',  defaultTarget: '' },
-    { cat: '루틴7',  defaultTarget: '' },
-    { cat: '루틴8',  defaultTarget: '' },
-    { cat: '루틴9',  defaultTarget: '' },
-    { cat: '루틴10', defaultTarget: '' },
-  ]},
+  // 건강/루틴 → 동적으로 userRoutines에서 렌더링
   { group: '가족 · 업무', items: [
     { cat: '가족', defaultTarget: '' },
     { cat: '업무', defaultTarget: '' },
   ]},
+];
+
+// ── 실적 상태 옵션 ──
+const STATUS_OPTIONS = [
+  { value: '',   label: '—',   color: '#3a3a4a' },
+  { value: '완료', label: '완료', color: '#6af2a0' },
+  { value: '못함', label: '못함', color: '#f26a6a' },
+  { value: '연기', label: '연기', color: '#f2c86a' },
+  { value: '일부', label: '일부', color: '#7c6af7' },
+  { value: '취소', label: '취소', color: '#7a7a9a' },
 ];
 
 // ── 시간가계부 카테고리 ──
@@ -559,6 +619,7 @@ let currentUser = null, selectedDate, viewYear, viewMonth;
 const today    = new Date();
 const todayKey = toKey(today.getFullYear(), today.getMonth(), today.getDate());
 let goalRecords = {}, timeRecords = {}, gratitudes = {}, keyResults = [];
+let userRoutines = []; // [{id, name, start_date, end_date, default_target, sort_order}]
 
 // Monthly state
 let monthlyYear = today.getFullYear();
@@ -700,9 +761,20 @@ async function initApp(){
   // KR add
   document.getElementById('krAddBtn').addEventListener('click',showKrDialog);
 
+  // Routine modal wiring
+  document.getElementById('routineModalClose').addEventListener('click', closeRoutineModal);
+  document.getElementById('routineModal').addEventListener('click', e=>{ if(e.target===e.currentTarget) closeRoutineModal(); });
+  document.getElementById('routineAddConfirmBtn').addEventListener('click', confirmAddRoutine);
+  document.getElementById('routineNameInput').addEventListener('keydown', e=>{ if(e.key==='Enter') confirmAddRoutine(); });
+
+  // Close status dropdowns when clicking outside
+  document.addEventListener('click', ()=>{
+    document.querySelectorAll('.status-menu:not(.hidden)').forEach(m=>m.classList.add('hidden'));
+  });
+
   renderCalendar(); renderDateLabels();
   setSyncState('syncing','불러오는 중');
-  await Promise.all([loadGoals(selectedDate), loadTime(selectedDate), loadGratitudes(), loadKR(), loadMonthlyItems()]);
+  await Promise.all([loadGoals(selectedDate), loadTime(selectedDate), loadGratitudes(), loadKR(), loadMonthlyItems(), loadRoutines()]);
   setSyncState('synced','동기화됨');
   renderGoals(); renderGoalsSidebar(); renderTime(); renderTimeChart(); renderGratitude(); calcStreak();
 }
@@ -790,15 +862,40 @@ async function saveGoals(){
   const status=document.getElementById('goalsSaveStatus');
   btn.disabled=true; setSyncState('syncing','저장 중');
   const rows=[];
+
+  // 정적 그룹 rows (캘린더, 투자, 가족·업무)
   document.querySelectorAll('.goal-row[data-cat]').forEach(row=>{
+    const grp=row.dataset.grp;
+    const catKey=row.dataset.cat;
+    const isCalendar=(grp==='캘린더');
+    // 캘린더 그룹은 target을 DOM에서 읽지 않고 기존 DB 값 유지
+    const existRec=getGoalRec(selectedDate,catKey);
+    const targetVal=isCalendar
+      ?(existRec?existRec.target:null)
+      :(row.querySelector('.g-target')?.value.trim()||null);
     rows.push({
       user_id:currentUser.id, date:selectedDate,
-      group_name:row.dataset.grp, category:row.dataset.cat,
+      group_name:grp, category:catKey,
       is_important:row.querySelector('.star-btn').classList.contains('on'),
-      target:row.querySelector('.g-target').value.trim()||null,
-      actual:row.querySelector('.g-actual').value.trim()||null,
+      target:targetVal,
+      actual:row.querySelector('.status-wrap')?.dataset.value||null,
     });
   });
+
+  // 루틴 rows
+  document.querySelectorAll('.goal-row[data-routine-id]').forEach(row=>{
+    const rid=row.dataset.routineId;
+    const routine=userRoutines.find(r=>r.id===rid);
+    if(!routine) return;
+    rows.push({
+      user_id:currentUser.id, date:selectedDate,
+      group_name:'루틴', category:`루틴/${rid}`,
+      is_important:row.querySelector('.star-btn').classList.contains('on'),
+      target:routine.default_target||null,
+      actual:row.querySelector('.status-wrap')?.dataset.value||null,
+    });
+  });
+
   const {error}=await sb.from('goal_records').upsert(rows,{onConflict:'user_id,date,category'});
   btn.disabled=false;
   if(error){console.error(error);setSyncState('error','저장 실패');status.textContent='저장 실패';return;}
@@ -809,49 +906,270 @@ async function saveGoals(){
   renderCalendar();
 }
 
+// ── STATUS DROPDOWN HELPER ──
+function makeStatusWrap(currentValue){
+  const optDef=STATUS_OPTIONS.find(o=>o.value===currentValue)||STATUS_OPTIONS[0];
+  const wrap=document.createElement('div');
+  wrap.className='status-wrap';
+  wrap.dataset.value=currentValue;
+
+  const btn=document.createElement('button');
+  btn.type='button';
+  btn.className='status-btn';
+
+  const sq=document.createElement('span');
+  sq.className='status-sq';
+  sq.style.background=optDef.color;
+
+  const lbl=document.createElement('span');
+  lbl.className='status-lbl'+(currentValue?'':' dim');
+  lbl.textContent=optDef.label;
+
+  const arrow=document.createElement('span');
+  arrow.className='status-arrow';
+  arrow.textContent='▾';
+
+  btn.append(sq,lbl,arrow);
+
+  const menu=document.createElement('div');
+  menu.className='status-menu hidden';
+
+  STATUS_OPTIONS.forEach(o=>{
+    const item=document.createElement('div');
+    item.className='status-opt';
+    item.innerHTML=`<span class="status-sq-sm" style="background:${o.color}"></span>${o.label}`;
+    item.addEventListener('click',(e)=>{
+      e.stopPropagation();
+      wrap.dataset.value=o.value;
+      sq.style.background=o.color;
+      lbl.textContent=o.label;
+      lbl.className='status-lbl'+(o.value?'':' dim');
+      menu.classList.add('hidden');
+    });
+    menu.appendChild(item);
+  });
+
+  btn.addEventListener('click',(e)=>{
+    e.stopPropagation();
+    document.querySelectorAll('.status-menu:not(.hidden)').forEach(m=>m.classList.add('hidden'));
+    menu.classList.toggle('hidden');
+  });
+
+  wrap.append(btn,menu);
+  return wrap;
+}
+
 // ── GOALS RENDER ──
 function renderGoals(){
   const container=document.getElementById('goalsMain');
   container.innerHTML='';
+
   const header=document.createElement('div');
   header.className='goal-row-header';
-  header.innerHTML=`<span class="col-lbl">카테고리</span><span class="col-lbl" style="text-align:center;">★</span><span class="col-lbl">목표</span><span class="col-lbl">실적</span>`;
+  header.innerHTML=`<span class="col-lbl">카테고리</span><span class="col-lbl" style="text-align:center;font-size:0.75rem;">★</span><span class="col-lbl">목표</span><span class="col-lbl">실적</span>`;
   container.appendChild(header);
 
+  // ── 정적 그룹 (캘린더, 투자, 가족·업무) ──
   GOAL_GROUPS.forEach(grpDef=>{
     const grpEl=document.createElement('div');
     grpEl.className='goal-group';
+
     const hdEl=document.createElement('div');
     hdEl.className='goal-group-hd';
-    hdEl.innerHTML=`<span>${esc(grpDef.group)}</span><span class="goal-group-toggle">▾</span>`;
+    let hdLabel=grpDef.group;
+    if(grpDef.fromMonthly) hdLabel+='<span style="font-size:0.62rem;color:var(--accent);margin-left:6px;font-weight:400;">월간계획 연동</span>';
+    hdEl.innerHTML=`<span>${hdLabel}</span><span class="goal-group-toggle">▾</span>`;
     hdEl.addEventListener('click',()=>grpEl.classList.toggle('collapsed'));
     grpEl.appendChild(hdEl);
 
     const body=document.createElement('div');
     body.className='goal-group-body';
+
     grpDef.items.forEach(item=>{
       const catKey=grpDef.group+'/'+item.cat;
       const rec=getGoalRec(selectedDate,catKey);
       const isImportant=rec?rec.is_important:false;
-      const targetVal=rec?(rec.target||''):item.defaultTarget;
+      const targetVal=rec?(rec.target||''):(item.defaultTarget||'');
       const actualVal=rec?(rec.actual||''):'';
 
       const row=document.createElement('div');
       row.className='goal-row';
       row.dataset.cat=catKey;
       row.dataset.grp=grpDef.group;
-      row.innerHTML=`
-        <span class="goal-cat-name">${esc(item.cat)}</span>
-        <button class="star-btn${isImportant?' on':''}">★</button>
-        <input class="goal-input g-target" type="text" value="${esc(targetVal)}" placeholder="목표">
-        <input class="goal-input actual g-actual" type="text" value="${esc(actualVal)}" placeholder="실적">
-      `;
-      row.querySelector('.star-btn').addEventListener('click',function(){ this.classList.toggle('on'); });
+
+      // 이름
+      const nameWrap=document.createElement('div');
+      nameWrap.className='goal-row-name';
+      const nameSpan=document.createElement('span');
+      nameSpan.className='goal-cat-name';
+      nameSpan.textContent=item.cat;
+      nameWrap.appendChild(nameSpan);
+
+      // 별
+      const starBtn=document.createElement('button');
+      starBtn.className='star-btn'+(isImportant?' on':'');
+      starBtn.textContent='★';
+      starBtn.addEventListener('click',function(){this.classList.toggle('on');});
+
+      // 목표
+      let targetEl;
+      if(grpDef.fromMonthly){
+        targetEl=document.createElement('div');
+        targetEl.className='goal-target-ro'+(targetVal?' has-val':'');
+        targetEl.textContent=targetVal||'월간계획 없음';
+        targetEl.title=targetVal||'';
+      } else {
+        targetEl=document.createElement('input');
+        targetEl.className='goal-input g-target';
+        targetEl.type='text';
+        targetEl.value=targetVal;
+        targetEl.placeholder='목표';
+      }
+
+      // 실적 (상태 드롭다운)
+      const statusWrap=makeStatusWrap(actualVal);
+
+      row.append(nameWrap,starBtn,targetEl,statusWrap);
       body.appendChild(row);
     });
+
     grpEl.appendChild(body);
     container.appendChild(grpEl);
   });
+
+  // ── 루틴 그룹 (동적) ──
+  const activeRoutines=getActiveRoutines(selectedDate);
+  const routineGrpEl=document.createElement('div');
+  routineGrpEl.className='goal-group';
+
+  const routineHdEl=document.createElement('div');
+  routineHdEl.className='goal-group-hd';
+  routineHdEl.style.cursor='pointer';
+
+  const routineHdLeft=document.createElement('span');
+  routineHdLeft.textContent='루틴';
+  const routineHdRight=document.createElement('div');
+  routineHdRight.style.cssText='display:flex;align-items:center;gap:8px;';
+
+  const addRoutineBtn=document.createElement('button');
+  addRoutineBtn.className='routine-add-btn';
+  addRoutineBtn.textContent='+ 추가';
+  addRoutineBtn.addEventListener('click',(e)=>{e.stopPropagation();openRoutineModal();});
+
+  const toggleSpan=document.createElement('span');
+  toggleSpan.className='goal-group-toggle';
+  toggleSpan.textContent='▾';
+
+  routineHdRight.append(addRoutineBtn,toggleSpan);
+  routineHdEl.append(routineHdLeft,routineHdRight);
+  routineHdEl.addEventListener('click',()=>routineGrpEl.classList.toggle('collapsed'));
+  routineGrpEl.appendChild(routineHdEl);
+
+  const routineBody=document.createElement('div');
+  routineBody.className='goal-group-body';
+
+  if(activeRoutines.length===0){
+    const emptyEl=document.createElement('div');
+    emptyEl.style.cssText='padding:14px 20px;font-size:0.8rem;color:var(--text-dim);';
+    emptyEl.textContent='이 날짜에 활성된 루틴이 없습니다. + 추가를 눌러 루틴을 등록하세요.';
+    routineBody.appendChild(emptyEl);
+  } else {
+    activeRoutines.forEach(routine=>{
+      const catKey=`루틴/${routine.id}`;
+      const rec=getGoalRec(selectedDate,catKey);
+      const isImportant=rec?rec.is_important:false;
+      const actualVal=rec?(rec.actual||''):'';
+
+      const row=document.createElement('div');
+      row.className='goal-row';
+      row.dataset.routineId=routine.id;
+      row.dataset.grp='루틴';
+
+      const nameWrap=document.createElement('div');
+      nameWrap.className='goal-row-name';
+      const nameSpan=document.createElement('span');
+      nameSpan.className='goal-cat-name';
+      nameSpan.textContent=routine.name;
+      const periodSpan=document.createElement('span');
+      periodSpan.className='routine-period';
+      periodSpan.textContent=`(${routine.start_date.slice(5)}~${routine.end_date.slice(5)})`;
+      const delBtn=document.createElement('button');
+      delBtn.className='routine-del-btn';
+      delBtn.textContent='✕';
+      delBtn.title='루틴 삭제';
+      delBtn.addEventListener('click',(e)=>{e.stopPropagation();deleteRoutine(routine.id);});
+      nameWrap.append(nameSpan,periodSpan,delBtn);
+
+      const starBtn=document.createElement('button');
+      starBtn.className='star-btn'+(isImportant?' on':'');
+      starBtn.textContent='★';
+      starBtn.addEventListener('click',function(){this.classList.toggle('on');});
+
+      const targetRo=document.createElement('div');
+      targetRo.className='goal-target-ro'+(routine.default_target?' has-val':'');
+      targetRo.textContent=routine.default_target||'';
+
+      const statusWrap=makeStatusWrap(actualVal);
+
+      row.append(nameWrap,starBtn,targetRo,statusWrap);
+      routineBody.appendChild(row);
+    });
+  }
+
+  routineGrpEl.appendChild(routineBody);
+  container.appendChild(routineGrpEl);
+}
+
+// ══════════════════════════════════════════════
+// ── ROUTINES ──
+// ══════════════════════════════════════════════
+
+async function loadRoutines(){
+  const {data,error}=await sb.from('routines')
+    .select('*').eq('user_id',currentUser.id).order('sort_order');
+  if(error){console.error(error);return;}
+  userRoutines=data||[];
+}
+
+function getActiveRoutines(date){
+  return userRoutines.filter(r=>r.start_date<=date&&date<=r.end_date);
+}
+
+function openRoutineModal(){
+  document.getElementById('routineNameInput').value='';
+  document.getElementById('routineStartInput').value=selectedDate;
+  document.getElementById('routineEndInput').value='';
+  document.getElementById('routineTargetInput').value='';
+  document.getElementById('routineModal').classList.remove('hidden');
+  setTimeout(()=>document.getElementById('routineNameInput').focus(),80);
+}
+function closeRoutineModal(){
+  document.getElementById('routineModal').classList.add('hidden');
+}
+async function confirmAddRoutine(){
+  const name=document.getElementById('routineNameInput').value.trim();
+  const start=document.getElementById('routineStartInput').value;
+  const end=document.getElementById('routineEndInput').value;
+  const defaultTarget=document.getElementById('routineTargetInput').value.trim();
+  if(!name||!start||!end){alert('이름, 시작일, 종료일을 모두 입력해주세요.');return;}
+  if(start>end){alert('종료일이 시작일보다 빠를 수 없습니다.');return;}
+  setSyncState('syncing','저장 중');
+  const {data,error}=await sb.from('routines').insert({
+    user_id:currentUser.id, name, start_date:start, end_date:end,
+    default_target:defaultTarget||null, sort_order:userRoutines.length,
+  }).select().single();
+  if(error){console.error(error);setSyncState('error','저장 실패');return;}
+  userRoutines.push(data);
+  setSyncState('synced','동기화됨');
+  closeRoutineModal();
+  renderGoals();
+}
+async function deleteRoutine(id){
+  if(!confirm('이 루틴을 삭제할까요?\n(기록된 실적 데이터는 유지됩니다)')) return;
+  const {error}=await sb.from('routines').delete().eq('id',id);
+  if(error){console.error(error);return;}
+  userRoutines=userRoutines.filter(r=>r.id!==id);
+  renderGoals();
 }
 
 // ── KEY RESULTS ──
